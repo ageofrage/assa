@@ -7,12 +7,8 @@
     "build": "sass --style=compressed --no-source-map examples/sass:examples/css",
     "watch": "sass --watch --no-source-map examples/sass:examples/css",
     "lint": "stylelint --fix lib",
-    "test": "yarn build && yarn lint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test"
-    }
+    "test": "yarn build && yarn lint",
+    "prepare": "husky install"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
