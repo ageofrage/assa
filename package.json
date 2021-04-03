@@ -1,5 +1,5 @@
 {
-  "name": "@hiroshi_agehara/assa",
+  "name": "@ageofrage/assa",
   "version": "0.0.0",
   "description": "sass utility mixins, functions and vars",
   "main": "index.js",
