@@ -1,0 +1,29 @@
+@use '../../utils/styles/index.scss' as *;
+
+html{
+  font-size: liquid();
+  font-family: var(--font-main);
+  line-height: $default-line;
+  letter-spacing: 0.03em;
+}
+
+body{
+  @include liquid-px(16);
+}
+
+:root{
+  // 色
+  @each $k, $v in $colors {
+    --color-#{$k}: #{$v};
+  }
+
+  // ブレイクポイント
+  @each $k, $v in $content-width {
+    --width-#{$k}: #{$v};
+  }
+
+  // フォント
+  @each $k, $v in $font-family {
+    --font-#{$k}: #{$v};
+  }
+}
