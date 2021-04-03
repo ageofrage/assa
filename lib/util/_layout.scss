@@ -1,0 +1,79 @@
+@use './utils' as *;
+
+// -------------------------------------------------------------------------- */
+//                                 var, config                                */
+// -------------------------------------------------------------------------- */
+
+$sp-side: 12px;
+
+// -------------------------------------------------------------------------- */
+//                               function, mixin                              */
+// -------------------------------------------------------------------------- */
+
+@mixin spPadding($side: $sp-side, $break: md) {
+  padding-right: $side;
+  padding-left: $side;
+
+  @include break($break) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+//レスポンシブなコンテンツ幅
+@mixin content($max: width(pc), $break: md) {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include break($break) {
+    max-width: $max;
+  }
+}
+
+// grid
+@mixin grid(
+  $fr: (
+    48fr
+  ),
+  $min-side: $sp-side
+) {
+  $_length: length($fr);
+  $_totalFr: 50fr;
+  display: grid;
+
+  @if $_length == 1 {
+    $_content: nth($fr, 1);
+    @if $_content > $_totalFr {
+      @error '引数が50fr以内に収まるようにしてください';
+    }
+
+    $_side: ($_totalFr - $_content) / 2;
+    grid-template: '. main .' / minmax($min-side, $_side) $_content minmax($min-side, $_side);
+  } @else if $_length == 2 {
+    $_content: nth($fr, 1) + nth($fr, 2);
+    @if $_content > $_totalFr {
+      @error '引数が50fr以内に収まるようにしてください';
+    }
+    $_side: ($_totalFr - $_content) / 2;
+
+    @if nth($fr, 1) < nth($fr, 2) {
+      grid-template: '. aside main .' / minmax($min-side, $_side) nth($fr, 1) nth($fr, 2) minmax($min-side, $_side);
+    } @else {
+      grid-template: '. main aside .' / minmax($min-side, $_side) nth($fr, 1) nth($fr, 2) minmax($min-side, $_side);
+    }
+  } @else if $_length == 3 {
+    $_content: nth($fr, 1) + nth($fr, 2) + nth($fr, 3);
+    @if $_content > $_totalFr {
+      @error '引数が48fr以内に収まるようにしてください';
+    }
+    $_side: ($_totalFr - $_content) / 2;
+
+    grid-template: '. left main right .' / minmax($min-side, $_side) nth($fr, 1) nth($fr, 2) nth($fr, 3) minmax(
+        $min-side,
+        $_side
+      );
+  } @else {
+    @error '対応するカラム数は1~3です';
+  }
+}

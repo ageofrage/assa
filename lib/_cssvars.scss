@@ -1,0 +1,18 @@
+@use './util/index.scss' as *;
+
+:root {
+  // 色
+  @each $k, $v in $colors {
+    --color-#{$k}: #{$v};
+  }
+
+  // ブレイクポイント
+  @each $k, $v in $content-width {
+    --width-#{$k}: #{$v};
+  }
+
+  // フォント
+  @each $k, $v in $font-family {
+    --font-#{$k}: #{$v};
+  }
+}

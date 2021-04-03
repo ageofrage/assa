@@ -1,0 +1,61 @@
+@use './utils.scss' as *;
+
+// -------------------------------------------------------------------------- */
+//                                 var, config                                */
+// -------------------------------------------------------------------------- */
+
+$font-family: (
+  main: 'sans-serif',
+  en: "'Josefin Sans', -apple-system, blinkmacsystemfont, sans-serif"
+);
+
+$default-sp-font: 13px;
+$default-pc-font: 16px;
+$default-line: 1.6;
+
+// -------------------------------------------------------------------------- */
+//                               function, mixin                              */
+// -------------------------------------------------------------------------- */
+
+// calcで指定して、font-sizeをレスポンシブにする
+@function liquid(
+  $minFont: $default-sp-font,
+  $maxFont: $default-pc-font,
+  $minDevice: width(min),
+  $maxDevice: width(max)
+) {
+  $diffFontSize: strip-unit($maxFont - $minFont);
+  $minDeviceNum: strip-unit($minDevice);
+  $maxDeviceNum: strip-unit($maxDevice);
+
+  @return calc(#{$minFont} + #{$diffFontSize} * ((100vw - #{$minDevice}) / (#{$maxDeviceNum} - #{$minDeviceNum})));
+}
+
+//表示行数制御
+@mixin limitRow($font: $default-sp-font, $row: 2, $line: $default-line, $max: false) {
+  display: block; // IE 対応
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: $font;
+  line-height: $line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $row;
+  text-overflow: ellipsis;
+
+  @if ($max) {
+    height: auto;
+    max-height: $font * $line * $minRow;
+  } @else {
+    height: $font * $line * $row;
+    max-height: unset;
+  }
+}
+
+// htmlrootに対するremをpxで指定する
+@mixin liquid-px($px) {
+  $rem: ($px / strip-unit($default-pc-font));
+  font-size: $rem + rem;
+  @include break('max') {
+    font-size: $px + px;
+  }
+}

@@ -1,0 +1,61 @@
+@use '../../lib/util' as *;
+
+@import '../../lib/optionalReset';
+@import '../../lib/cssvars';
+
+.color {
+  color: color('pale');
+  background: var(--color-pale);
+}
+
+.font {
+  font-size: liquid();
+}
+
+.row {
+  @include limitRow;
+}
+
+.liquid {
+  @include liquid-px(24);
+}
+
+.layout {
+  @include spPadding;
+  @include content;
+}
+
+.grid {
+  @include grid;
+}
+
+.ratio {
+  &:before {
+    content: ratio(bronze);
+  }
+  @include aspect;
+}
+
+.ellipse {
+  @include ellipse(60px, 200px);
+}
+
+.circle {
+  @include circle(50px);
+}
+
+.util {
+  @include break() {
+    @include before {
+      width: width(min);
+      color: red;
+    }
+  }
+  @include after {
+    color: red;
+  }
+}
+
+.z-index {
+  z-index: z(top);
+}

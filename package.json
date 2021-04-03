@@ -1,0 +1,54 @@
+{
+  "name": "@hiroshi_agehara/assa",
+  "version": "0.0.0",
+  "description": "sass utility mixins, functions and vars",
+  "main": "index.js",
+  "scripts": {
+    "build": "sass --style=compressed --no-source-map examples/sass:examples/css",
+    "watch": "sass --watch --no-source-map examples/sass:examples/css",
+    "lint": "stylelint --fix lib",
+    "test": "yarn build && yarn lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "test"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ageofrage/assa.git"
+  },
+  "keywords": [
+    "css",
+    "sass",
+    "scss",
+    "mixin",
+    "bourbon.io"
+  ],
+  "author": "hiroshi agehara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ageofrage/assa/issues"
+  },
+  "homepage": "https://github.com/ageofrage/assa#readme",
+  "peerDependencies": {
+    "sass": "^1.32.8"
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.8",
+    "stylelint": "^13.12.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-prettier": "^1.2.0",
+    "stylelint-scss": "^3.19.0"
+  },
+  "dependencies": {
+    "bourbon": "^7.0.0"
+  }
+}

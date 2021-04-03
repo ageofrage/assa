@@ -1,0 +1,52 @@
+@forward '../../node_modules/bourbon/core/_bourbon.scss';
+
+// -------------------------------------------------------------------------- */
+//                                 var, config                                */
+// -------------------------------------------------------------------------- */
+
+$content-width: (
+  min: 320px,
+  max: 1440px,
+  landscape: 896px,
+  pc: 1200px
+);
+
+@function width($size) {
+  @return map-get($content-width, $size);
+}
+
+$breaks: (
+  // 最小・最大
+  min: 'screen and (max-width:#{width(min)})',
+  max: 'screen and (min-width: #{width(max)})',
+  sm: 'screen and (max-width:#{width(landscape)})',
+  md: 'screen and (min-width:#{(width(landscape) + 1)})',
+  lg: 'screen and (min-width:#{width(pc)})'
+);
+
+// -------------------------------------------------------------------------- */
+//                               function, mixin                              */
+// -------------------------------------------------------------------------- */
+
+// ブレイクポイント
+@mixin break($point: md) {
+  @media #{map-get($breaks, $point)} {
+    @content;
+  }
+}
+
+@mixin before() {
+  &:before {
+    display: block;
+    content: '';
+    @content;
+  }
+}
+
+@mixin after() {
+  &:after {
+    display: block;
+    content: '';
+    @content;
+  }
+}
