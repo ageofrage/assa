@@ -1,11 +1,16 @@
 @use '../../lib/util' as *;
 
+// CAUTION: @import は将来的に廃止される
+@import './_theme.scss';
+
 @import '../../lib/optionalReset';
 @import '../../lib/cssvars';
 
 .color {
   color: color('pale');
   background: var(--color-pale);
+  // bourbon.io
+  @include padding(null 20px);
 }
 
 .font {
@@ -13,7 +18,7 @@
 }
 
 .row {
-  @include limitRow;
+  @include limitLines;
 }
 
 .liquid {

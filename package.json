@@ -7,8 +7,10 @@
     "build": "sass --style=compressed --no-source-map examples/sass:examples/css",
     "watch": "sass --watch --no-source-map examples/sass:examples/css",
     "lint": "stylelint --fix lib",
+    "doc": "sassdoc lib/",
     "test": "yarn build && yarn lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublish": "yarn test && yarn doc"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -37,6 +39,7 @@
     "husky": "^6.0.0",
     "prettier": "^2.2.1",
     "sass": "^1.32.8",
+    "sassdoc": "^2.7.3",
     "stylelint": "^13.12.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.3.0",

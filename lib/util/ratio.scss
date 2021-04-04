@@ -1,8 +1,10 @@
-// -------------------------------------------------------------------------- */
-//                                 var, config                                */
-// -------------------------------------------------------------------------- */
+////
+/// @group ratio
+////
 
-// 画像の比率を返す
+/// height ratios map.
+/// to manage ratios as map, you can convert it to css-vars easily.
+/// DO NOT DELETE normal key !! (this is default value of @aspect mixin).
 $ratios: (
   square: (
     1 / 1
@@ -34,19 +36,23 @@ $ratios: (
   bronze: (
     1 / 3.303
   )
-);
+) !default;
 
-// -------------------------------------------------------------------------- */
-//                               function, mixin                              */
-// -------------------------------------------------------------------------- */
-
+/// @param {$ratios key} $name
+/// @return {float} $ratios val (height ratio).
 @function ratio($name) {
   $target: map-get($ratios, $name);
 
   @return ceil($target * 1000) / 1000;
 }
 
-// thumbnailのアスペクト比率とobject-fitの設定
+/// set the ratio * width as height (padding-top).
+///
+/// this is for iframe, img video and so on.
+/// @param {$ratios key} $name [normal]
+/// @param {'cover' | 'contain'} $fit [cover]
+/// @param {selector} $selector ['img'] - child selector
+/// @param {'before' | 'after'} $pseudo ['after'] - this has the 'ratio height' (padding-top)
 @mixin aspect($name: normal, $fit: cover, $selector: 'img', $pseudo: 'after') {
   position: relative;
   display: block;

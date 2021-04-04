@@ -1,20 +1,28 @@
 @forward '../../node_modules/bourbon/core/_bourbon.scss';
+////
+/// @group utils
+/// this file can be used in anywhere offcourse in `util/`
+////
 
-// -------------------------------------------------------------------------- */
-//                                 var, config                                */
-// -------------------------------------------------------------------------- */
-
+/// content-width map.
+/// this is related to break-point or content-width.
 $content-width: (
   min: 320px,
   max: 1440px,
   landscape: 896px,
   pc: 1200px
-);
+) !default;
 
+/// @param {$content-width key} $size choice key from $content-width map.
+/// @returns {$content-width val} return $content-width val.
 @function width($size) {
   @return map-get($content-width, $size);
 }
 
+/// break-point map.
+///
+/// mobile-first is on by default.
+/// @require {function} width
 $breaks: (
   // 最小・最大
   min: 'screen and (max-width:#{width(min)})',
@@ -22,19 +30,16 @@ $breaks: (
   sm: 'screen and (max-width:#{width(landscape)})',
   md: 'screen and (min-width:#{(width(landscape) + 1)})',
   lg: 'screen and (min-width:#{width(pc)})'
-);
+) !default;
 
-// -------------------------------------------------------------------------- */
-//                               function, mixin                              */
-// -------------------------------------------------------------------------- */
-
-// ブレイクポイント
+/// @param {$breaks key} $name choice key from $breaks map.
 @mixin break($point: md) {
   @media #{map-get($breaks, $point)} {
     @content;
   }
 }
 
+/// short-hand of use pseudo
 @mixin before() {
   &:before {
     display: block;
@@ -43,6 +48,7 @@ $breaks: (
   }
 }
 
+/// short-hand of use pseudo
 @mixin after() {
   &:after {
     display: block;

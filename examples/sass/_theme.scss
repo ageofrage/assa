@@ -1,0 +1,49 @@
+// color
+$colors: (
+  'deep': red,
+  'deep2': blue,
+  'pale': green,
+  'pale2': yellow
+);
+
+//font
+$font-family: (
+  main: 'sans-serif',
+  en: "'Josefin Sans', -apple-system, blinkmacsystemfont, sans-serif"
+);
+
+$default-sp-font: 11px;
+$default-pc-font: 14px;
+$default-line: 2;
+
+// layout
+$sp-side: 16px;
+
+// ratio
+$ratios: (
+  normal: (
+    1 / 1
+  ),
+  banner: (
+    1 / 3
+  ),
+  bronze: (
+    1 / 3.303
+  )
+);
+
+//utils
+$content-width: (
+  min: 320px,
+  max: 1440px,
+  landscape: 896px,
+  pc: 1120px
+);
+
+$breaks: (
+  min: 'screen and (max-width:#{width(min)})',
+  max: 'screen and (min-width: #{width(max)})',
+  sm: 'screen and (max-width:#{width(landscape)})',
+  md: 'screen and (min-width:#{(width(landscape) + 1)})',
+  lg: 'screen and (min-width:#{width(pc)})'
+);

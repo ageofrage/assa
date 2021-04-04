@@ -1,2 +1,2 @@
 # assa
-sass utility mixins, functions, vars and reset.
+sass utility mixins, functions and vars.

@@ -1,15 +1,16 @@
 @use './utils' as *;
 
-// -------------------------------------------------------------------------- */
-//                                 var, config                                */
-// -------------------------------------------------------------------------- */
+////
+/// @group layout
+////
 
-$sp-side: 12px;
+/// mobile-device's side padding.
+$sp-side: 12px !default;
 
-// -------------------------------------------------------------------------- */
-//                               function, mixin                              */
-// -------------------------------------------------------------------------- */
-
+/// add padding to both-side in mobile
+/// @require {mixin} break
+/// @param {*} $side [$sp-side] - both-side padding
+/// @param {$content-width key} $break [md] - breakpoint
 @mixin spPadding($side: $sp-side, $break: md) {
   padding-right: $side;
   padding-left: $side;
@@ -20,7 +21,10 @@ $sp-side: 12px;
   }
 }
 
-//レスポンシブなコンテンツ幅
+/// set max-width on the breakpoint and centered
+/// @require {mixin} break
+/// @param {$content-width key} $break [md] - breakpoint
+/// @param {$content-width key} $max [width(pc)]  - content max-width on the breakpoint
 @mixin content($max: width(pc), $break: md) {
   width: 100%;
   margin-right: auto;
@@ -31,7 +35,15 @@ $sp-side: 12px;
   }
 }
 
-// grid
+/// make grid layout-system.
+///
+/// this base on 50 fr.
+///
+/// both side 1fr area-names are blank.
+///
+/// this has [main, side?, aside?, left?, right?] area-names.
+/// @param {int[]} $fr [(48fr)]  - you can set between 1 to 3 columns.
+/// @param {*} $min-side [$sp-side] - side padding
 @mixin grid(
   $fr: (
     48fr
@@ -45,7 +57,7 @@ $sp-side: 12px;
   @if $_length == 1 {
     $_content: nth($fr, 1);
     @if $_content > $_totalFr {
-      @error '引数が50fr以内に収まるようにしてください';
+      @error 'over 50fr';
     }
 
     $_side: ($_totalFr - $_content) / 2;
@@ -53,7 +65,7 @@ $sp-side: 12px;
   } @else if $_length == 2 {
     $_content: nth($fr, 1) + nth($fr, 2);
     @if $_content > $_totalFr {
-      @error '引数が50fr以内に収まるようにしてください';
+      @error 'over 50fr';
     }
     $_side: ($_totalFr - $_content) / 2;
 
@@ -65,7 +77,7 @@ $sp-side: 12px;
   } @else if $_length == 3 {
     $_content: nth($fr, 1) + nth($fr, 2) + nth($fr, 3);
     @if $_content > $_totalFr {
-      @error '引数が48fr以内に収まるようにしてください';
+      @error 'over 48 fr';
     }
     $_side: ($_totalFr - $_content) / 2;
 
@@ -74,6 +86,6 @@ $sp-side: 12px;
         $_side
       );
   } @else {
-    @error '対応するカラム数は1~3です';
+    @error 'you cannot set columns below 1 or over 3';
   }
 }
