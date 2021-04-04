@@ -24,7 +24,6 @@ $content-width: (
 /// mobile-first is on by default.
 /// @require {function} width
 $breaks: (
-  // 最小・最大
   min: 'screen and (max-width:#{width(min)})',
   max: 'screen and (min-width: #{width(max)})',
   sm: 'screen and (max-width:#{width(landscape)})',
